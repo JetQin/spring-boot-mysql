@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  db:
+    image: mysql
+    # volumes:
+    #   - db_data:/var/lib/mysql
+    container_name: mysql-container
+    ports:
+     - "3000:3306"
+    environment:
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=ThePassword
+      - MYSQL_DATABASE=db_example
+      - MYSQL_ROOT_PASSWORD=root
+
+  gs_data:
+    build: .
+    image: spring-boot-gs-data
+    container_name: gs-data-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=192.168.99.100
+      - DB_PORT=3000
+      - DB_USER=springuser
+      - DB_PASSWORD=ThePassword
+      - DB_NAME=db_example
