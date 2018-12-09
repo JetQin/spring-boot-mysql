@@ -1,9 +1,7 @@
-version: '3.3'
+version: '3.3'                
 services:
   db:
     image: mysql
-    # volumes:
-    #   - db_data:/var/lib/mysql
     container_name: mysql-container
     ports:
      - "3000:3306"
